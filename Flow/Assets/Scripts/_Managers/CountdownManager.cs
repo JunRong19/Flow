@@ -20,6 +20,9 @@ public class CountdownManager : Singleton<CountdownManager> {
 
 		float countdownTime = timeSelector.CurrentValue;
 		float maxTime = timeSelector.MaxValue;
-		countdownTimer.StartTimer(countdownTime, maxTime);
+
+        CornType growingType = timeSelector.TimingIntervals[(int)timeSelector.CurrentIndex].Type;
+
+		countdownTimer.StartTimer(countdownTime, maxTime, growingType);
 	}
 }

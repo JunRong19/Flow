@@ -6,15 +6,34 @@ using TMPro;
 
 public class RadialSlider : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
+    [System.Serializable]
+    public class SliderTiming {
+        public int Time;
+        public CornType Type;
+        public Sprite SpriteToDisplay;
+    }
+
     private const string PREFS_UI_SAVE_NAME = "Radial";
 
     [Header("TIMER")]
-    [SerializeField, Tooltip("The gap between each timing before the picture changes, timings can only be set according to the interval, so no inbetween.")]
+    [SerializeField, Tooltip("The gap between each timing before the number changes, timings can only be set according to the interval, so no inbetween.")]
     private int timeInterval = 5;
     [Tooltip("The current time selected by the slider")]
     public float CurrentValue = 10.0f;
     [Tooltip("The maximum time allowed")]
     public float MaxValue = 100.0f;
+
+    [Header("TIMINGS")]
+    [SerializeField, Tooltip("All the possible sprites to change at different times")]
+    public SliderTiming[] TimingIntervals;
+    [SerializeField, Tooltip("Corn sprite to change as timing changes")]
+    private SpriteRenderer cornSprite;
+    [SerializeField, Tooltip("The currently selected corn sprite")]
+    public float CurrentIndex;
+    [SerializeField, Tooltip("Minimum time before the sprite should change")]
+    private float lowerRange;
+    [SerializeField, Tooltip("Maximum time before the sprite should change")]
+    private float upperRange;
 
     [Header("OBJECTS")]
     [SerializeField]
@@ -192,6 +211,28 @@ public class RadialSlider : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
         CurrentValue = Mathf.Round((normalizedAngle * MaxValue) / timeInterval) * timeInterval;
         valueText.text = string.Format("{0}{1}", CurrentValue, isPercent ? "%" : "") + ":00";
+
+        UpdateTimerSprite(CurrentValue);
+    }
+
+    private void UpdateTimerSprite(float time) {
+
+        if(lowerRange < time && time < upperRange) {
+            return;
+        }
+
+        for(int index = TimingIntervals.Length - 1; index >= 0; index--) {
+            if(time >= TimingIntervals[index].Time) {
+                cornSprite.sprite = TimingIntervals[index].SpriteToDisplay;
+
+                CurrentIndex = index;
+
+                lowerRange = TimingIntervals[index].Time;
+                upperRange = TimingIntervals[Mathf.Clamp(index + 1, 0, TimingIntervals.Length - 1)].Time;
+
+                break;
+            }
+        }
     }
 
     private bool HasValueChanged()

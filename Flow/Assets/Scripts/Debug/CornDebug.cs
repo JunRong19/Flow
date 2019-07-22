@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class CornDebug : MonoBehaviour {
 	private void Update() {
-		if(Input.GetMouseButtonDown(0)) {
+		if(Input.GetKeyDown(KeyCode.Space)) {
 			Debug.Log("You grew an adult corn!");
 			CornLoader.LoadCorn(CornType.Adult);
 		}
@@ -15,7 +15,7 @@ public class CornDebug : MonoBehaviour {
 		}
 
 		if(Input.GetMouseButtonDown(2)) {
-			SceneManager.LoadScene("TimerTest");
+			SceneManager.LoadScene("Timer");
 		}
 	}
 }
