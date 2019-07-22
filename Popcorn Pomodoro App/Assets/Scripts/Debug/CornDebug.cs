@@ -1,0 +1,21 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class CornDebug : MonoBehaviour {
+	private void Update() {
+		if(Input.GetMouseButtonDown(0)) {
+			Debug.Log("You grew an adult corn!");
+			CornLoader.LoadCorn(CornType.Adult);
+		}
+
+		if(Input.GetMouseButtonDown(1)) {
+			SceneManager.LoadScene("JunRongTestScene");
+		}
+
+		if(Input.GetMouseButtonDown(2)) {
+			SceneManager.LoadScene("JunRongTestScene2");
+		}
+	}
+}
