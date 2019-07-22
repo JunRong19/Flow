@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee4bf043caf4a1c4ba2e1b76be782268, type: 3}
   m_Name: Corn_Bud
   m_EditorClassIdentifier: 
-  cornSprite: {fileID: -7417327031809388919, guid: 27eec7b32e6905e4dae02198cd0224b0,
+  CornSprite: {fileID: -7417327031809388919, guid: 27eec7b32e6905e4dae02198cd0224b0,
     type: 3}
+  Type: 1

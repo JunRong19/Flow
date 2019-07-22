@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee4bf043caf4a1c4ba2e1b76be782268, type: 3}
   m_Name: Corn_Baby
   m_EditorClassIdentifier: 
-  cornSprite: {fileID: -3858351318765136649, guid: 27eec7b32e6905e4dae02198cd0224b0,
+  CornSprite: {fileID: -3858351318765136649, guid: 27eec7b32e6905e4dae02198cd0224b0,
     type: 3}
+  Type: 2

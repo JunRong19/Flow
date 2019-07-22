@@ -361,6 +361,23 @@ MonoBehaviour:
     corn: {fileID: 11400000, guid: 822c0085748743c49aa51a2394619cf9, type: 2}
   - cornType: 0
     corn: {fileID: 11400000, guid: de2b9e39e9f4e6049ab96aab3d720151, type: 2}
+  - cornType: 7
+    corn: {fileID: 11400000, guid: bebe1f2f5a0bffb4d85efde16ccc3aca, type: 2}
+  cornStringData:
+  - cornName: None
+    cornType: 7
+  - cornName: Dead
+    cornType: 0
+  - cornName: Baby
+    cornType: 2
+  - cornName: Child
+    cornType: 3
+  - cornName: Teenager
+    cornType: 4
+  - cornName: Adult
+    cornType: 5
+  - cornName: BuffAdult
+    cornType: 6
 --- !u!114 &2035038844
 MonoBehaviour:
   m_ObjectHideFlags: 0

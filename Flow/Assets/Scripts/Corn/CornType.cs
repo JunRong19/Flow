@@ -6,5 +6,6 @@ public enum CornType {
 	Child,
 	Teenager,
 	Adult,
-    BuffAdult
+    BuffAdult,
+    None
 }
