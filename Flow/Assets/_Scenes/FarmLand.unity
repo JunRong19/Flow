@@ -264,7 +264,7 @@ Camera:
   far clip plane: 100
   field of view: 60
   orthographic: 1
-  orthographic size: 11.8
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -339,5 +339,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   farmTile: {fileID: 4754691798314925929, guid: d2966f99d8066c84080c63a42056b612,
     type: 3}
+  farmIndex: 0
   width: 6
   height: 6

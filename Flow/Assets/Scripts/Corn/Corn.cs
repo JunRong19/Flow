@@ -4,5 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Corn", order = 1)]
 public class Corn : ScriptableObject {
-	public Sprite cornSprite;
+	public Sprite CornSprite;
+
+    public CornType Type = CornType.None;
 }

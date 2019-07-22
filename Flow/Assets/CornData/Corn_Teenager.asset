@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee4bf043caf4a1c4ba2e1b76be782268, type: 3}
+  m_Name: Corn_Teenager
+  m_EditorClassIdentifier: 
+  CornSprite: {fileID: 5142497871464638469, guid: 27eec7b32e6905e4dae02198cd0224b0,
+    type: 3}
+  Type: 4
