@@ -11,11 +11,11 @@ public class CornDebug : MonoBehaviour {
 		}
 
 		if(Input.GetMouseButtonDown(1)) {
-			SceneManager.LoadScene("JunRongTestScene");
+			SceneManager.LoadScene("FarmLand");
 		}
 
 		if(Input.GetMouseButtonDown(2)) {
-			SceneManager.LoadScene("JunRongTestScene2");
+			SceneManager.LoadScene("TimerTest");
 		}
 	}
 }

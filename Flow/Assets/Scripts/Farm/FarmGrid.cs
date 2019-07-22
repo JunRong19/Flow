@@ -73,7 +73,7 @@ public class FarmGrid : MonoBehaviour {
 			PlantCornAtRandomPosition(unloadedCorns[i]);
 		}
 
-		// Save the game here + date.
+		// Save the game here.
 	}
 
 	private void PlantCornAtGridPosition(Vector2Int pos, CornType cornType) {

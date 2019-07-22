@@ -1,5 +1,4 @@
-﻿public enum PanelType
-{
-    CornTimer,
-    Countdown
+﻿public enum PanelType {
+	CornTimer,
+	Countdown
 }

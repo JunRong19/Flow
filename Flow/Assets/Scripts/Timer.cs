@@ -5,60 +5,54 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class Timer : MonoBehaviour
-{
-    [SerializeField, Tooltip("Text used to display time")]
-    private TextMeshProUGUI timeText;
-    [SerializeField, Tooltip("Text used to display time")]
-    private Image timeLeftImage;
+public class Timer : MonoBehaviour {
+	[SerializeField, Tooltip("Text used to display time")]
+	private TextMeshProUGUI timeText;
+	[SerializeField, Tooltip("Text used to display time")]
+	private Image timeLeftImage;
 
-    private TimeSpan timeLeft;
+	private TimeSpan timeLeft;
 
-    private float initialSeconds;
-    private float maxSeconds;
+	private float initialSeconds;
+	private float maxSeconds;
 
-    [SerializeField, Tooltip("Debug purposes, shows current time left to wait")]
-    private float currentSeconds;
+	[SerializeField, Tooltip("Debug purposes, shows current time left to wait")]
+	private float currentSeconds;
 
-    public void StartTimer(float initialMinutes, float maxMinutes)
-    {
-        initialSeconds = initialMinutes * 60;
-        maxSeconds = maxMinutes * 60;
+	public void StartTimer(float initialMinutes, float maxMinutes) {
+		initialSeconds = initialMinutes * 60;
+		maxSeconds = maxMinutes * 60;
 
-        currentSeconds = initialSeconds;
+		currentSeconds = initialSeconds;
 
-        StartCoroutine(CountdownTime());
-    }
+		StartCoroutine(CountdownTime());
+	}
 
-    private IEnumerator CountdownTime()
-    {
-        /// Refactor this
-        timeLeftImage.fillAmount = currentSeconds / maxSeconds;
+	private IEnumerator CountdownTime() {
+		/// Refactor this
+		timeLeftImage.fillAmount = currentSeconds / maxSeconds;
 
-        while (currentSeconds > 0)
-        {
-            timeLeft = TimeSpan.FromSeconds(currentSeconds);
+		while(currentSeconds > 0) {
+			timeLeft = TimeSpan.FromSeconds(currentSeconds);
 
-            timeText.text = string.Format("{0:D2}:{1:D2}", timeLeft.Minutes + timeLeft.Hours * 60, timeLeft.Seconds);
+			timeText.text = string.Format("{0:D2}:{1:D2}", timeLeft.Minutes + timeLeft.Hours * 60, timeLeft.Seconds);
 
-            currentSeconds--;
+			currentSeconds--;
 
-            if (currentSeconds % 60 == 0)
-            {
-                timeLeftImage.fillAmount = currentSeconds / maxSeconds;
-            }
+			if(currentSeconds % 60 == 0) {
+				timeLeftImage.fillAmount = currentSeconds / maxSeconds;
+			}
 
-            yield return new WaitForSeconds(1f);
-        }
+			yield return new WaitForSeconds(1f);
+		}
 
-        StopTimer();
-    }
+		StopTimer();
+	}
 
-    private void StopTimer()
-    {
-        PanelManager panelManager = PanelManager.Instance;
+	private void StopTimer() {
+		PanelManager panelManager = PanelManager.Instance;
 
-        panelManager.TogglePanelVisibility(PanelType.CornTimer, true);
-        panelManager.TogglePanelVisibility(PanelType.Countdown, false);
-    }
+		panelManager.TogglePanelVisibility(PanelType.CornTimer, true);
+		panelManager.TogglePanelVisibility(PanelType.Countdown, false);
+	}
 }
