@@ -21,12 +21,16 @@ public class FarmTile : MonoBehaviour {
         set => position = value;
     }
 
-	#endregion
+    #endregion
 
-	/// <summary>
-	/// Update the corn and the sprite in this tile.
-	/// </summary>
-	private void UpdateCorn(Corn newCorn) {
+    private void Awake() {
+        position = new Vector2Int((int)transform.position.x, (int)transform.position.z);
+    }
+
+    /// <summary>
+    /// Update the corn and the sprite in this tile.
+    /// </summary>
+    private void UpdateCorn(Corn newCorn) {
 		cornGraphic.sprite = newCorn.CornSprite;
 		corn = newCorn;
 	}

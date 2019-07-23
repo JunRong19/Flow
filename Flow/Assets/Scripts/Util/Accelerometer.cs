@@ -29,7 +29,7 @@ public class Accelerometer : MonoBehaviour {
 	}
 
 	private void Update() {
-		HandleAcceleromter();
+		//HandleAcceleromter();
 	}
 
 	private void HandleAcceleromter() {
