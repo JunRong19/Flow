@@ -11,8 +11,8 @@ public class Timer : MonoBehaviour {
 	[SerializeField, Tooltip("Text used to display time")]
 	private Image timeLeftImage;
 
-    [SerializeField, Tooltip("Current type of corn growing")]
-    private CornType growingCornType;
+	[SerializeField, Tooltip("Current type of corn growing")]
+	private CornType growingCornType;
 
 	private TimeSpan timeLeft;
 
@@ -22,20 +22,20 @@ public class Timer : MonoBehaviour {
 	[SerializeField, Tooltip("Debug purposes, shows current time left to wait")]
 	private float currentSeconds;
 
-    public void StartTimer(float initialMinutes, float maxMinutes, CornType growingType) {
+	public void StartTimer(float initialMinutes, float maxMinutes, CornType growingType) {
 		initialSeconds = initialMinutes * 60;
 		maxSeconds = maxMinutes * 60;
 
 		currentSeconds = initialSeconds;
 
-        growingCornType = growingType;
+		growingCornType = growingType;
 
 		StartCoroutine(CountdownTime());
 	}
 
-    public void CancelTimer() {
-        StopTimer(false);
-    }
+	public void CancelTimer() {
+		StopTimer(false);
+	}
 
 	private IEnumerator CountdownTime() {
 		/// Refactor this
@@ -58,14 +58,14 @@ public class Timer : MonoBehaviour {
 		StopTimer(true);
 	}
 
-	private void StopTimer(bool success) {
+	public void StopTimer(bool success) {
 
-        if(success) {
-            CornLoader.LoadCorn(growingCornType);
-        } else {
-            CornLoader.LoadCorn(CornType.Dead);
-        }
-        PanelManager panelManager = PanelManager.Instance;
+		if(success) {
+			CornLoader.LoadCorn(growingCornType);
+		} else {
+			CornLoader.LoadCorn(CornType.Dead);
+		}
+		PanelManager panelManager = PanelManager.Instance;
 
 		panelManager.TogglePanelVisibility(PanelType.CornTimer, true);
 		panelManager.TogglePanelVisibility(PanelType.Countdown, false);
