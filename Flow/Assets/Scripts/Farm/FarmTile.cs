@@ -5,7 +5,7 @@ using UnityEngine;
 public class FarmTile : MonoBehaviour {
 	[SerializeField] private SpriteRenderer cornGraphic;
 
-    [SerializeField, Tooltip("Where the tile is in the grid")] private Vector2Int position;
+    [SerializeField, Tooltip("Where the tile is in the grid list")] private int position;
 
 	[SerializeField] private Corn corn;
 
@@ -16,17 +16,17 @@ public class FarmTile : MonoBehaviour {
 		set => UpdateCorn(value);
 	}
 
-    public Vector2Int Position {
+    public int Position {
         get => position;
         set => position = value;
     }
 
-	#endregion
+    #endregion
 
-	/// <summary>
-	/// Update the corn and the sprite in this tile.
-	/// </summary>
-	private void UpdateCorn(Corn newCorn) {
+    /// <summary>
+    /// Update the corn and the sprite in this tile.
+    /// </summary>
+    private void UpdateCorn(Corn newCorn) {
 		cornGraphic.sprite = newCorn.CornSprite;
 		corn = newCorn;
 	}

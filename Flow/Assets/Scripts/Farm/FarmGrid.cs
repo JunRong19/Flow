@@ -5,82 +5,72 @@ using CI.QuickSave;
 using System;
 
 public class FarmGrid : MonoBehaviour {
-	[SerializeField, Tooltip("Prefab of one tile.")] private FarmTile farmTile;
-
     [SerializeField, Tooltip("Current farm index the player is looking at")] private int farmIndex;
 
-	[SerializeField, Tooltip("Width of the grid.")] private int width = 6;
-	[SerializeField, Tooltip("Height of the grid.")] private int height = 6;
+	[SerializeField, Tooltip("All the tiles in the farm")] private List<FarmTile> farmTiles = new List<FarmTile>();
 
-	private FarmTile[,] farmGrid;
-
-	private List<FarmTile> emptyTiles = new List<FarmTile>();
-	private List<FarmTile> filledTiles = new List<FarmTile>();
-
+	[SerializeField] private List<FarmTile> emptyTiles = new List<FarmTile>();
+	[SerializeField] private List<FarmTile> filledTiles = new List<FarmTile>();
+    
 	private void Start() {
-		InitializeGrid();
-		LoadCornFromSave();
+        InitializeTiles();
+        LoadTileDataFromFarm(0);
 		UnloadCorn();
-	}
+
+        void InitializeTiles() {
+            for(int index = 0; index < farmTiles.Count; index++) {
+                farmTiles[index].Position = index;
+            }
+        }
+    }
 
     private void OnDisable() {
         SaveGrid();
     }
 
-    private void InitializeGrid() {
-		// Initialize the 2D array for the farm grid.
-		farmGrid = new FarmTile[width, height];
-
-		// Cache the position of the farm tiles.
-		Vector3 pos = new Vector3();
-
-		// Loop through all the coords of the grid.
-		for(int w = 0; w < width; w++) {
-			for(int h = 0; h < height; h++) {
-				pos.x = w;
-				pos.z = h;
-
-				// Spawn farm tiles and parent them to this gameobject.
-				FarmTile tile = Instantiate(farmTile, pos, Quaternion.identity);
-				tile.transform.parent = transform;
-
-                tile.Position = new Vector2Int(w, h);
-
-				// Assign the newly spawned farm tile to the current coords of the grid.
-				farmGrid[w, h] = tile;
-
-				// The newly spawn tiles are empty.
-				emptyTiles.Add(tile);
-			}
-		}
-	}
-
 	/// <summary>
-	/// Load any corns in the save system for the current day.
+	/// Loads and sets all farm tiles data based on farm index
 	/// </summary>
-	private void LoadCornFromSave() {
+	private void LoadTileDataFromFarm(int farmIndex) {
+        // If there isn't a save for any farm grids, set up the whole farm grid as empty
+        if(!QuickSaveRoot.Exists("FarmGrids")) {
+            foreach(FarmTile tile in farmTiles) {
+                emptyTiles.Add(tile);
+            }
+            return;
+        }
 
-        if(QuickSaveRoot.Exists("FarmGrids")) {
-            string farmInfo = "";
+        string farmInfo = "";
 
-            QuickSaveReader.Create("FarmGrids")
-                .Read<string>("Farm" + farmIndex, (r) => { farmInfo = r; });
+        // Gets the farm information based on its index
+        QuickSaveReader.Create("FarmGrids")
+            .Read<string>("Farm" + farmIndex, (r) => { farmInfo = r; });
 
-            string[] tiles = farmInfo.Split(';');
+        // Each tile is seperated by a ';'
+        string[] tiles = farmInfo.Split(';');
 
-            for(int index = 0; index < tiles.Length; index++) {
+        // Sets up every farm tile
+        for(int index = 0; index < tiles.Length; index++) {
 
-                if(index == tiles.Length - 1) {
-                    continue;
-                }
+            // Last tile has a ';' after it so last element in array is empty and should skip
+            if(index == tiles.Length - 1) {
+                continue;
+            }
 
-                string[] tileInfo = tiles[index].Split(',');
+            // Each information in the tile is seperated by a ','
+            string[] tileInfo = tiles[index].Split(',');
 
-                Enum.TryParse(tileInfo[2], out CornType type);
+            // Where the tile is in the game world
+            int pos = int.Parse(tileInfo[0]);
 
-                if(type != CornType.None) {
-                    PlantCornAtGridPosition(new Vector2Int(int.Parse(tileInfo[0]), int.Parse(tileInfo[1])), type);
-                }
+            // The type of corn currently on the farm
+            Enum.TryParse(tileInfo[1], out CornType type);
+
+            if(type != CornType.None) {
+                PlantCornAtGridPosition(pos, type);
+            } else {
+                FarmTile emptyTile = farmTiles[pos];
+                emptyTiles.Add(emptyTile);
             }
         }
     }
@@ -103,7 +93,9 @@ public class FarmGrid : MonoBehaviour {
 		for(int i = 0; i < unloadedCorns.Count; i++) {
 			// If all the tiles are full, stop planting any more corns.
 			if(emptyTiles.Count <= 0) {
-				Debug.Log("Grid is full, you planted enough corns today, come back tomorrow!");
+
+                /// Go to next farm...
+
 				break;
 			}
 			PlantCornAtRandomPosition(unloadedCorns[i]);
@@ -115,9 +107,9 @@ public class FarmGrid : MonoBehaviour {
     private void SaveGrid() {
         string farmInfo = "";
 
-        foreach(FarmTile tile in farmGrid) {
+        foreach(FarmTile tile in farmTiles) {
             string tileInfo = "";
-            tileInfo += tile.Position.x + "," + tile.Position.y;
+            tileInfo += tile.Position;
 
             if(tile.Corn == null || tile.Corn.Type == CornType.None) {
                 tileInfo += "," + CornType.None;
@@ -135,22 +127,21 @@ public class FarmGrid : MonoBehaviour {
             .Commit();
     }
 
-    private void PlantCornAtGridPosition(Vector2Int pos, CornType cornType) {
-		// Plant a corn at a specific position on the grid.
-		farmGrid[pos.x, pos.y].Corn = CornDictionary.GetCornByType(cornType);
+    private void PlantCornAtGridPosition(int pos, CornType cornType) {
+        // Plant a corn at a specific position on the grid.
+        FarmTile farmTile = farmTiles[pos];
 
-		// Update the empty and filled tiles list.
-		emptyTiles.Remove(farmGrid[pos.x, pos.y]);
-		filledTiles.Add(farmGrid[pos.x, pos.y]);
+        farmTile.Corn = CornDictionary.GetCornByType(cornType);
+
+		// Update the filled tiles list.
+		filledTiles.Add(farmTile);
 	}
 
 	private void PlantCornAtRandomPosition(CornType cornType) {
 		// Choose a random tile to plant the corn.
 		FarmTile randomTile = emptyTiles[UnityEngine.Random.Range(0, emptyTiles.Count)];
 		randomTile.Corn = CornDictionary.GetCornByType(cornType);
-
-        Debug.Log("Planting corn at random pos");
-
+        
         // Update the empty and filled tiles list.
         emptyTiles.Remove(randomTile);
 		filledTiles.Add(randomTile);

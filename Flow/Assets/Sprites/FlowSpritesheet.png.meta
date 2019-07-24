@@ -1,0 +1,496 @@
+fileFormatVersion: 2
+guid: d8e32f7cb22e2b748abfea8ef570691c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1528426720503124457
+    second: BG_Carriage
+  - first:
+      213: -1456748490378158891
+    second: BG_Tree
+  - first:
+      213: 380760006425179491
+    second: Corn_Child
+  - first:
+      213: 5915546928097640488
+    second: Corn_Baby
+  - first:
+      213: -200997725461366608
+    second: Corn_Teenager
+  - first:
+      213: 5591850992362618075
+    second: BG_Tractor
+  - first:
+      213: 7084322858331933439
+    second: Corn_Adult
+  - first:
+      213: -5135058847900541548
+    second: BG_Box
+  - first:
+      213: 6584720045956949425
+    second: Corn_BuffAdult
+  - first:
+      213: 6598680439251686617
+    second: BG_FarmHouse
+  - first:
+      213: -2218930464986436211
+    second: BG_Billboard
+  - first:
+      213: 6798144929276623234
+    second: BG_Fence
+  - first:
+      213: -4074713939868001633
+    second: BG_WindmillSmall
+  - first:
+      213: -8051503963106783778
+    second: BG_Windmall
+  - first:
+      213: 4140387370072414665
+    second: Grid_Tile
+  - first:
+      213: -3910000399100915769
+    second: BG_BrownHouse
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 290
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BG_Carriage
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1946
+        width: 120
+        height: 102
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3c11af572da3754c9aa4fd2aff92658
+      internalID: -1528426720503124457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BG_Tree
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 1888
+        width: 111
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f30b2e4340271fe44936a6e2ab3457d6
+      internalID: -1456748490378158891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corn_Child
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 1892
+        width: 115
+        height: 156
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c555874c338df664ab9109b47c656925
+      internalID: 380760006425179491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corn_Baby
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 1891
+        width: 116
+        height: 157
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f05d3823fe208ab45a49695eeca299ab
+      internalID: 5915546928097640488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corn_Teenager
+      rect:
+        serializedVersion: 2
+        x: 542
+        y: 1882
+        width: 184
+        height: 166
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3aba6f76dbb81a84293164a83bcb8273
+      internalID: -200997725461366608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BG_Tractor
+      rect:
+        serializedVersion: 2
+        x: 746
+        y: 1856
+        width: 173
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1740f15202269e4429050147914282b9
+      internalID: 5591850992362618075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corn_Adult
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1605
+        width: 140
+        height: 231
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c6e5dd6d0c75614f9788cfe91ccff51
+      internalID: 7084322858331933439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BG_Box
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 1603
+        width: 202
+        height: 233
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d316fc8de1459d84f8def2adf988a81b
+      internalID: -5135058847900541548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Corn_BuffAdult
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 1583
+        width: 183
+        height: 253
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d571c1261a6de647ab43913818404ec
+      internalID: 6584720045956949425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BG_FarmHouse
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 1588
+        width: 230
+        height: 248
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16846d69b894a5049be4b54beaa3db45
+      internalID: 6598680439251686617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BG_Billboard
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1264
+        width: 227
+        height: 299
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96e50019fba647746b2aaf0d64a59c50
+      internalID: -2218930464986436211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BG_Fence
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 1349
+        width: 326
+        height: 214
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1cd5cea70befbe4398fb362f94e7de8
+      internalID: 6798144929276623234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BG_WindmillSmall
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 1207
+        width: 193
+        height: 356
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ed55e552ba1dd64db655e332f620aa1
+      internalID: -4074713939868001633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BG_Windmall
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 859
+        width: 246
+        height: 328
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14160c186142f1742a37603951a678bf
+      internalID: -8051503963106783778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grid_Tile
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 853
+        width: 291
+        height: 334
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05e7c9b748da5e94ea20e857d3f736be
+      internalID: 4140387370072414665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BG_BrownHouse
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 765
+        width: 408
+        height: 423
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 660443c9a17fdd94cb408be9a037e6b7
+      internalID: -3910000399100915769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: ede39b9a4d1e87c4ab682809b6a10ac0
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
