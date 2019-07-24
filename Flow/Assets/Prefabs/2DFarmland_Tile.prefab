@@ -68,7 +68,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -976311807
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 4140387370072414665, guid: d8e32f7cb22e2b748abfea8ef570691c,
     type: 3}
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cornGraphic: {fileID: 4431096008644428806}
-  position: {x: 0, y: 0}
+  position: 0
   corn: {fileID: 11400000, guid: bebe1f2f5a0bffb4d85efde16ccc3aca, type: 2}
 --- !u!1 &6314726553372843515
 GameObject:
@@ -165,7 +165,8 @@ SpriteRenderer:
   m_SortingLayerID: -1784136529
   m_SortingLayer: 4
   m_SortingOrder: 1
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 7084322858331933439, guid: d8e32f7cb22e2b748abfea8ef570691c,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -173,6 +174,6 @@ SpriteRenderer:
   m_Size: {x: 0.4827586, y: 0.7965517}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
