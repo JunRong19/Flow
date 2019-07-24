@@ -24,17 +24,18 @@ public class NetworkChecker : MonoBehaviour {
 
 
 	private void Start() {
-		AllowConnection = true;
 		waitingTime = new WaitForSeconds(pingInterval);
 	}
 
 	private void Update() {
-		UpdateNetworkConnectivity();
+		if(AllowConnection) {
+			UpdateNetworkConnectivity();
+		}
 	}
 
 	private void UpdateNetworkConnectivity() {
-		// If user is currently pinging or user turn off the "Off Wifi" option, don't try to make any connections.
-		if(isPinging || !AllowConnection) {
+		// If user is currently pinging, don't try to make any connections.
+		if(isPinging) {
 			return;
 		}
 
