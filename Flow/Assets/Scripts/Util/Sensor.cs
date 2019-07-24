@@ -2,20 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sensor : MonoBehaviour {
-	[SerializeField] private NetworkChecker networkChecker;
-	[SerializeField] private Accelerometer accelerometer;
+public class Sensor : Singleton<Sensor> {
 
-	public void ToggleNetworkChecker(bool state) {
-		networkChecker.enabled = state;
+	public static bool ReadyToPlant() {
+		// If one of the sensor is not correct, return false.
+		if(IsNetworkReady() && IsAccelerometerReady()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
-	public void ToggleAccelerometer(bool state) {
-		accelerometer.enabled = state;
+	private static bool IsNetworkReady() {
+		if(!NetworkChecker.AllowConnection || !NetworkChecker.HasNetwork) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private static bool IsAccelerometerReady() {
+		if(!Accelerometer.AllowAccelerometer || Accelerometer.IsStationary) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	private void Update() {
 		Debug.Log("Network checker toggle: " + NetworkChecker.AllowConnection);
 		Debug.Log("Accelerometer toggle: " + Accelerometer.AllowAccelerometer);
+
+		Debug.Log("Network has network: " + NetworkChecker.HasNetwork);
+		Debug.Log("Accelerometer is stationary: " + Accelerometer.IsStationary);
 	}
 }
