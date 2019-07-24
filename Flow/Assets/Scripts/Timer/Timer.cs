@@ -50,8 +50,8 @@ public class Timer : MonoBehaviour {
 			currentSeconds--;
 
 			if(currentSeconds % 60 == 0) {
-				timeLeftImage.fillAmount = currentSeconds / maxSeconds;
-			}
+                UpdateTimerFill();
+            }
 
 			yield return new WaitForSeconds(1f);
 		}
@@ -68,7 +68,14 @@ public class Timer : MonoBehaviour {
 		}
 		PanelManager panelManager = PanelManager.Instance;
 
-		panelManager.TogglePanelVisibility(PanelType.CornTimer, true);
+        currentSeconds = 0;
+        UpdateTimerFill();
+
+        panelManager.TogglePanelVisibility(PanelType.CornTimer, true);
 		panelManager.TogglePanelVisibility(PanelType.Countdown, false);
 	}
+
+    private void UpdateTimerFill() {
+        timeLeftImage.fillAmount = currentSeconds / maxSeconds;
+    }
 }

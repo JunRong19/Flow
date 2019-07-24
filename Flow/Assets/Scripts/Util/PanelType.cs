@@ -1,5 +1,6 @@
 ﻿public enum PanelType {
 	CornTimer,
 	Countdown,
-	Settings
+	Settings,
+    MainMenuButtons
 }
