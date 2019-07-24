@@ -9,19 +9,17 @@ public class FarmGrid : MonoBehaviour {
 
 	[SerializeField, Tooltip("All the tiles in the farm")] private List<FarmTile> farmTiles = new List<FarmTile>();
 
-	private List<FarmTile> emptyTiles = new List<FarmTile>();
-	private List<FarmTile> filledTiles = new List<FarmTile>();
-
-    private Dictionary<Vector2Int, FarmTile> farmTilePosDict = new Dictionary<Vector2Int, FarmTile>(); // Used for faster searching of tile based on its position
-
+	[SerializeField] private List<FarmTile> emptyTiles = new List<FarmTile>();
+	[SerializeField] private List<FarmTile> filledTiles = new List<FarmTile>();
+    
 	private void Start() {
-        InitializeTileDictionary();
+        InitializeTiles();
         LoadTileDataFromFarm(0);
 		UnloadCorn();
 
-        void InitializeTileDictionary() {
-            foreach(FarmTile tile in farmTiles) {
-                farmTilePosDict.Add(tile.Position, tile);
+        void InitializeTiles() {
+            for(int index = 0; index < farmTiles.Count; index++) {
+                farmTiles[index].Position = index;
             }
         }
     }
@@ -39,7 +37,6 @@ public class FarmGrid : MonoBehaviour {
             foreach(FarmTile tile in farmTiles) {
                 emptyTiles.Add(tile);
             }
-
             return;
         }
 
@@ -64,15 +61,15 @@ public class FarmGrid : MonoBehaviour {
             string[] tileInfo = tiles[index].Split(',');
 
             // Where the tile is in the game world
-            Vector2Int pos = new Vector2Int(int.Parse(tileInfo[0]), int.Parse(tileInfo[1]));
+            int pos = int.Parse(tileInfo[0]);
 
             // The type of corn currently on the farm
-            Enum.TryParse(tileInfo[2], out CornType type);
+            Enum.TryParse(tileInfo[1], out CornType type);
 
             if(type != CornType.None) {
                 PlantCornAtGridPosition(pos, type);
             } else {
-                farmTilePosDict.TryGetValue(pos, out FarmTile emptyTile);
+                FarmTile emptyTile = farmTiles[pos];
                 emptyTiles.Add(emptyTile);
             }
         }
@@ -112,7 +109,7 @@ public class FarmGrid : MonoBehaviour {
 
         foreach(FarmTile tile in farmTiles) {
             string tileInfo = "";
-            tileInfo += tile.Position.x + "," + tile.Position.y;
+            tileInfo += tile.Position;
 
             if(tile.Corn == null || tile.Corn.Type == CornType.None) {
                 tileInfo += "," + CornType.None;
@@ -130,9 +127,9 @@ public class FarmGrid : MonoBehaviour {
             .Commit();
     }
 
-    private void PlantCornAtGridPosition(Vector2Int pos, CornType cornType) {
+    private void PlantCornAtGridPosition(int pos, CornType cornType) {
         // Plant a corn at a specific position on the grid.
-        farmTilePosDict.TryGetValue(pos, out FarmTile farmTile);
+        FarmTile farmTile = farmTiles[pos];
 
         farmTile.Corn = CornDictionary.GetCornByType(cornType);
 
