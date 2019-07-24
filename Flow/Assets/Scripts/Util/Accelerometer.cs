@@ -9,6 +9,8 @@ public class Accelerometer : MonoBehaviour {
 	[SerializeField, Tooltip("Minimum and maximum range (-+) from flat vector.")] private float sensitivityRange;
 	[SerializeField, Tooltip("The lower this value, the less smooth the value is and faster Accel is updated.")] private float updateSpeed = 30.0f;
 
+	public static bool IsStationary { get; private set; }
+
 	private float accelerometerUpdateInterval = 1.0f;
 	private float lowPassKernelWidthInSeconds = 1.0f;
 	private float lowPassFilterFactor = 0;
@@ -38,7 +40,10 @@ public class Accelerometer : MonoBehaviour {
 
 		//Check if user's phone had moved greater than limit.
 		if(Vector3.Distance(flatVector, filteredAccelValue) > sensitivityRange) {
+			IsStationary = false;
 			CountdownManager.Instance.StopCountDown(false);
+		} else {
+			IsStationary = true;
 		}
 	}
 
