@@ -25,6 +25,7 @@ public class NetworkChecker : MonoBehaviour {
 
 	private void Start() {
 		waitingTime = new WaitForSeconds(pingInterval);
+		StartCoroutine(PingForNetwork());
 	}
 
 	private void Update() {
