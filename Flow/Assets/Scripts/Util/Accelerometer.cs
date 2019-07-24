@@ -9,6 +9,7 @@ public class Accelerometer : MonoBehaviour {
 	[SerializeField, Tooltip("Minimum and maximum range (-+) from flat vector.")] private float sensitivityRange;
 	[SerializeField, Tooltip("The lower this value, the less smooth the value is and faster Accel is updated.")] private float updateSpeed = 30.0f;
 
+	public static bool AllowAccelerometer { get; set; }
 	public static bool IsStationary { get; private set; }
 
 	private float accelerometerUpdateInterval = 1.0f;
@@ -31,7 +32,9 @@ public class Accelerometer : MonoBehaviour {
 	}
 
 	private void Update() {
-		//HandleAcceleromter();
+		if(AllowAccelerometer) {
+			HandleAcceleromter();
+		}
 	}
 
 	private void HandleAcceleromter() {

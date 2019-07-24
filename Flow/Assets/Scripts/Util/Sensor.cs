@@ -15,7 +15,7 @@ public class Sensor : MonoBehaviour {
 	}
 
 	private void Update() {
-		Debug.Log(NetworkChecker.HasNetwork);
-		Debug.Log(Accelerometer.IsStationary);
+		Debug.Log("Network checker toggle: " + NetworkChecker.AllowConnection);
+		Debug.Log("Accelerometer toggle: " + Accelerometer.AllowAccelerometer);
 	}
 }
