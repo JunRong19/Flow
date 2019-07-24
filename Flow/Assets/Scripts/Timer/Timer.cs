@@ -23,6 +23,7 @@ public class Timer : MonoBehaviour {
 	private float currentSeconds;
 
 	public void StartTimer(float initialMinutes, float maxMinutes, CornType growingType) {
+
 		initialSeconds = initialMinutes * 60;
 		maxSeconds = maxMinutes * 60;
 

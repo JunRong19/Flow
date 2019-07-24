@@ -67,6 +67,12 @@ public class NetworkChecker : MonoBehaviour {
 			return false;
 		}
 
+		if(CountdownManager.isCountingDown) {
+			CountdownManager.Instance.StopCountDown(false);
+			CountdownManager.isCountingDown = false;
+			return false;
+		}
+
 		return true;
 	}
 
@@ -85,6 +91,7 @@ public class NetworkChecker : MonoBehaviour {
 		if(ping != null && ping.isDone) {
 			// Able to establish connection.
 			HasNetwork = true;
+
 		} else {
 			// Failed to establish connection.
 			HasNetwork = false;

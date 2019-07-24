@@ -3498,7 +3498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 877baa39ecf1b064a84fce064af99dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivityRange: 0
+  sensitivityRange: 0.1
   updateSpeed: 30
 --- !u!1 &1722292783
 GameObject:
@@ -3661,7 +3661,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53354f8d6a981f46b4a368941bc4226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pingInterval: 2
+  pingInterval: 1
 --- !u!1 &1808469804
 GameObject:
   m_ObjectHideFlags: 0
@@ -4311,8 +4311,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d562b818725cf904e85b12356602c781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  networkChecker: {fileID: 0}
-  accelerometer: {fileID: 0}
+  networkChecker: {fileID: 1779364098}
+  accelerometer: {fileID: 1717224245}
 --- !u!4 &2063165461
 Transform:
   m_ObjectHideFlags: 0
