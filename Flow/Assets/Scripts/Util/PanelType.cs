@@ -2,5 +2,6 @@
 	CornTimer,
 	Countdown,
 	Settings,
-    MainMenuButtons
+    MainMenuButtons,
+    UnplantedCornWarning
 }

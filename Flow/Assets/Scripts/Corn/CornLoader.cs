@@ -13,6 +13,10 @@ public class CornLoader : MonoBehaviour {
 		loader.Add(cornType);
 	}
 
+    public static int GetUnloadCornLength() {
+        return loader.Count;
+    }
+
 	public static List<CornType> UnloadCorn() {
 		// Create a new list to unload since list is reference type.
 		List<CornType> unloadedCorns = new List<CornType>(loader);

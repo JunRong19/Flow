@@ -1,20 +1,22 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CI.QuickSave;
-using System;
+using BayatGames.SaveGameFree;
 
 public class FarmGrid : MonoBehaviour {
-    [SerializeField, Tooltip("Current farm index the player is looking at")] private int farmIndex = -1;
+    [SerializeField, Tooltip("Current farm index the player is looking at")] public int farmIndex = -1;
 
 	[SerializeField, Tooltip("All the tiles in the farm")] private List<FarmTile> farmTiles = new List<FarmTile>();
+
+    [SerializeField] private FarmSwapper farmSwapper;
 
 	[SerializeField] private List<FarmTile> emptyTiles = new List<FarmTile>();
 	[SerializeField] private List<FarmTile> filledTiles = new List<FarmTile>();
     
 	private void Start() {
         InitializeTiles();
-        LoadTileDataFromFarm(0);
 		UnloadCorn();
 
         void InitializeTiles() {
@@ -23,36 +25,46 @@ public class FarmGrid : MonoBehaviour {
             }
         }
     }
-
-    private void OnDisable() {
-        SaveGrid();
-    }
-
+    
 	/// <summary>
 	/// Loads and sets all farm tiles data based on farm index
 	/// </summary>
 	public void LoadTileDataFromFarm(int newIndex) {
 
-        SaveGrid();
-
-        emptyTiles.Clear();
-        filledTiles.Clear();
-
-        farmIndex = newIndex;
-
         // If there isn't a save for any farm grids, set up the whole farm grid as empty
-        if(!QuickSaveRoot.Exists("FarmGrids")) {
+        if(!SaveGame.Exists("FarmGrids")) {
             foreach(FarmTile tile in farmTiles) {
                 emptyTiles.Add(tile);
             }
             return;
         }
 
-        string farmInfo = "";
 
-        // Gets the farm information based on its index
-        QuickSaveReader.Create("FarmGrids")
-            .Read<string>("Farm" + newIndex, (r) => { farmInfo = r; });
+        //// If there isn't a save for any farm grids, set up the whole farm grid as empty
+        //if(!QuickSaveRoot.Exists("FarmGrids")) {
+        //    foreach(FarmTile tile in farmTiles) {
+        //        emptyTiles.Add(tile);
+        //    }
+        //    return;
+        //}
+
+
+        emptyTiles.Clear();
+        filledTiles.Clear();
+
+        farmIndex = newIndex;
+
+        List<string> farmsInfo = SaveGame.Load<List<string>>("FarmGrids");
+
+        string farmInfo = farmsInfo[newIndex];
+
+
+        //string farmInfo = "";
+
+        //// Gets the farm information based on its index
+        //QuickSaveReader.Create("FarmGrids")
+        //    .Read<string>("Farm" + newIndex, (r) => { farmInfo = r; });
+
 
         // Each tile is seperated by a ';'
         string[] tiles = farmInfo.Split(';');
@@ -78,33 +90,45 @@ public class FarmGrid : MonoBehaviour {
                 PlantCornAtGridPosition(pos, type);
             } else {
                 FarmTile emptyTile = farmTiles[pos];
+                emptyTile.Corn = CornDictionary.GetCornByType(CornType.None);
                 emptyTiles.Add(emptyTile);
             }
         }
     }
 
-	/// <summary>
-	/// Unload any corns that the player planted.
-	/// </summary>
-	private void UnloadCorn() {
+    public void CreateTileDataFromFarm(int newIndex) {
+        emptyTiles.Clear();
+
+        foreach(FarmTile filledTile in filledTiles) {
+            filledTile.Corn = CornDictionary.GetCornByType(CornType.None);
+        }
+        filledTiles.Clear();
+
+        foreach(FarmTile tile in farmTiles) {
+            emptyTiles.Add(tile);
+        }
+
+        farmIndex = newIndex;
+        SaveGrid();
+    }
+
+    /// <summary>
+    /// Unload any corns that the player planted.
+    /// </summary>
+    private void UnloadCorn() {
 		List<CornType> unloadedCorns = CornLoader.UnloadCorn();
 
         // If there is no corn to unload return.
-        if(unloadedCorns.Count <= 0 || emptyTiles.Count <= 0) {
-
-            /// TO DO adding corns to the next farm
-
-			return;
+        if(emptyTiles.Count <= 0) {
+            farmSwapper.ExpandFarmList();
 		}
 
 		// Start planting the unloaded corns at random position. 
 		for(int i = 0; i < unloadedCorns.Count; i++) {
 			// If all the tiles are full, stop planting any more corns.
 			if(emptyTiles.Count <= 0) {
-
-                /// Go to next farm...
-
-				break;
+                SaveGrid();
+                farmSwapper.ExpandFarmList();
 			}
 			PlantCornAtRandomPosition(unloadedCorns[i]);
 		}
@@ -130,9 +154,26 @@ public class FarmGrid : MonoBehaviour {
             farmInfo += tileInfo;
         }
 
-        QuickSaveWriter.Create("FarmGrids")
-            .Write("Farm" + farmIndex, farmInfo)
-            .Commit();
+        List<string> farmsInfo = SaveGame.Load <List<string>>("FarmGrids");
+
+        if(farmsInfo == null) {
+            farmsInfo = new List<string>();
+        }
+
+        // Add slots until index reached
+        if(farmIndex > farmsInfo.Count - 1) {
+            farmsInfo.Add("");
+        }
+
+        farmsInfo[farmIndex] = farmInfo;
+
+        SaveGame.Save<List<string>>("FarmGrids", farmsInfo);
+
+
+        //QuickSaveWriter.Create("FarmGrids")
+        //    .Write("Farm" + farmIndex, farmInfo)
+        //    .Commit();
+
     }
 
     private void PlantCornAtGridPosition(int pos, CornType cornType) {

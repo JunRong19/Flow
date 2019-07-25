@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using CI.QuickSave;
+using BayatGames.SaveGameFree;
 
 public class Timer : MonoBehaviour {
     [Header("INFORMATION")]
@@ -16,6 +17,9 @@ public class Timer : MonoBehaviour {
     [SerializeField, Tooltip("List of timings for the sprite to change into")] private SliderTiming[] timings;
     [SerializeField, Tooltip("Corn sprite to change as timing changes")] private SpriteRenderer cornSprite;
 
+    [Header("PLANTING")]
+    [SerializeField] private TextMeshProUGUI unPlantedWarning;
+
     private Queue<SliderTiming> nextTiming = new Queue<SliderTiming>();
 
     private float secondsPassed;
@@ -23,7 +27,7 @@ public class Timer : MonoBehaviour {
 	private TimeSpan timeLeft;
 
 	private float initialSeconds;
-	private float maxSeconds;
+    private float maxSeconds;
 
 	[SerializeField, Tooltip("Debug purposes, shows current time left to wait")]
 	private float currentSeconds;
@@ -31,13 +35,11 @@ public class Timer : MonoBehaviour {
     private bool timerRunning;
 
     private void Awake() {
-        currentSeconds = 0;
-        secondsPassed = 0;
+        UpdateUnplantedWarning(false);
     }
 
     // Handles screen timeout, timer will continue "running" when screen is off and app is paused
     private void OnApplicationPause(bool pause) {
-
         if(!timerRunning)
             return;
 
@@ -45,8 +47,12 @@ public class Timer : MonoBehaviour {
             DateTime previous = DateTime.UtcNow;
             DateTime now = DateTime.UtcNow;
 
-            QuickSaveReader.Create("SleepInfo")
-                .Read<DateTime>("PhoneSleptTime", (r) => { previous = r; });
+            previous = SaveGame.Load<DateTime>("PhoneSleptTime");
+
+
+            //QuickSaveReader.Create("SleepInfo")
+            //    .Read<DateTime>("PhoneSleptTime", (r) => { previous = r; });
+
 
             float seconds = (float)(previous - now).TotalSeconds;
 
@@ -57,9 +63,13 @@ public class Timer : MonoBehaviour {
         } else {
             DateTime now = DateTime.UtcNow;
 
-            QuickSaveWriter.Create("SleepInfo")
-                .Write("PhoneSleptTime", now)
-                .Commit();
+            SaveGame.Save<DateTime>("PhoneSleptTime", now);
+
+
+            //QuickSaveWriter.Create("SleepInfo")
+            //    .Write("PhoneSleptTime", now)
+            //    .Commit();
+
         }
     }
 
@@ -76,12 +86,11 @@ public class Timer : MonoBehaviour {
 
         void SetupSeconds() {
             initialSeconds = initialMinutes * 60;
-            maxSeconds = maxMinutes * 60;
-            secondsPassed = 0;
-
             currentSeconds = initialSeconds;
 
-            UpdateTimerFill();
+            secondsPassed = 0;
+
+            maxSeconds = maxMinutes * 60;
         }
 
         void AddCornSprites() {
@@ -111,11 +120,25 @@ public class Timer : MonoBehaviour {
 
         panelManager.TogglePanelVisibility(PanelType.CornTimer, true);
         panelManager.TogglePanelVisibility(PanelType.Countdown, false);
+
+        if(CornLoader.GetUnloadCornLength() > 0) {
+            UpdateUnplantedWarning(true);
+        }
+    }
+
+    private void UpdateUnplantedWarning(bool state) {
+        PanelManager.Instance.TogglePanelVisibility(PanelType.UnplantedCornWarning, state);
+
+        if(state) {
+            unPlantedWarning.text = "You still have " + CornLoader.GetUnloadCornLength() + " corns not planted! Visit your farm to plant them or lose them!";
+        }
     }
 
     private IEnumerator CountdownTime() {
 
-		while(currentSeconds > 0) {
+        UpdateTimerFill();
+
+        while(currentSeconds > 0) {
 			timeLeft = TimeSpan.FromSeconds(currentSeconds);
 
 			timeText.text = string.Format("{0:D2}:{1:D2}", timeLeft.Minutes + timeLeft.Hours * 60, timeLeft.Seconds);
@@ -152,4 +175,18 @@ public class Timer : MonoBehaviour {
     private void UpdateTimerFill() {
         timeLeftImage.fillAmount = currentSeconds / maxSeconds;
     }
+
+    /// DEBUG! DELETE LATER!
+    /// 
+    public List<CornType> DebugTypes = new List<CornType>();
+
+    public void FastForwardTime() {
+        currentSeconds = 2;
+    }
+
+    public void PlantRandomCorn() {
+        int index = UnityEngine.Random.Range(0, DebugTypes.Count);
+        CornLoader.LoadCorn(DebugTypes[index]);
+    }
+
 }
