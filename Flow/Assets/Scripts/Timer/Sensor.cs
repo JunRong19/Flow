@@ -6,24 +6,7 @@ public class Sensor : Singleton<Sensor> {
 
 	public static bool ReadyToPlant() {
 		// If one of the sensor is not correct, return false.
-		Debug.Log(IsNetworkReady());
-		if(IsNetworkReady() && IsAccelerometerReady()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	private static bool IsNetworkReady() {
-		if(!NetworkChecker.AllowConnection || !NetworkChecker.HasNetwork) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	private static bool IsAccelerometerReady() {
-		if(!Accelerometer.AllowAccelerometer || Accelerometer.IsStationary) {
+		if(NetworkChecker.Instance.IsNetworkReady() && Accelerometer.Instance.IsAccelerometerReady()) {
 			return true;
 		} else {
 			return false;
