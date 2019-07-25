@@ -18,7 +18,7 @@ public class CountdownManager : Singleton<CountdownManager> {
 
 	public void StartCountDown() {
 		if(!Sensor.ReadyToPlant()) {
-			Debug.Log("Does not fullfil the requirement to start planting.");
+            panelManager.TogglePanelVisibility(PanelType.PlantingWarning, true);
 			return;
 		}
 

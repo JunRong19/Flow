@@ -13,11 +13,11 @@ public class Sensor : Singleton<Sensor> {
 		}
 	}
 
-	private void Update() {
-		//	Debug.Log("Network checker toggle: " + NetworkChecker.AllowConnection);
-		//	Debug.Log("Accelerometer toggle: " + Accelerometer.AllowAccelerometer);
+    public static bool NetworkReady() {
+        return NetworkChecker.IsNetworkReady();
+    }
 
-		//	Debug.Log("Network has network: " + NetworkChecker.HasNetwork);
-		//	Debug.Log("Accelerometer is stationary: " + Accelerometer.IsStationary);
-	}
+    public static bool AccelerometerReady() {
+        return Accelerometer.IsAccelerometerReady();
+    }
 }

@@ -3,5 +3,6 @@
 	Countdown,
 	Settings,
     MainMenuButtons,
-    UnplantedCornWarning
+    UnplantedCornWarning,
+    PlantingWarning
 }

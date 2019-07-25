@@ -2882,6 +2882,7 @@ GameObject:
   - component: {fileID: 954243883}
   - component: {fileID: 954243885}
   - component: {fileID: 954243884}
+  - component: {fileID: 954243886}
   m_Layer: 5
   m_Name: ToastPanel
   m_TagString: Untagged
@@ -2946,6 +2947,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 954243882}
   m_CullTransparentMesh: 0
+--- !u!114 &954243886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954243882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 834766ca16b963f4680e38c8e4a6571b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toastText: {fileID: 656365514}
+  waitSeconds: 0
+  BeforeStartNetwork: Please disable your internet before starting, or disable network
+    options in Settings!
+  BeforeStartAccelerometer: Please put your phone down flat before starting, or disable
+    that options in Settings!
+  BeforeStartBoth: Please disable your internet and put your phone down before starting,
+    or disable those options in Settings!
 --- !u!1 &970386900
 GameObject:
   m_ObjectHideFlags: 0
@@ -3699,6 +3720,10 @@ MonoBehaviour:
   - Type: 4
     Objects:
     - {fileID: 872896319}
+    startHidden: 1
+  - Type: 5
+    Objects:
+    - {fileID: 954243882}
     startHidden: 1
 --- !u!1 &1291124349
 GameObject:
