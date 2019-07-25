@@ -83,6 +83,8 @@ public class Timer : MonoBehaviour {
         }
 
         void AddCornSprites() {
+            nextTiming.Clear();
+
             foreach(SliderTiming timing in timings) {
                 nextTiming.Enqueue(timing);
             }

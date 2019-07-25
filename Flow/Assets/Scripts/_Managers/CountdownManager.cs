@@ -40,6 +40,8 @@ public class CountdownManager : Singleton<CountdownManager> {
 		countdownTimer.StopTimer(success);
 		isCountingDown = false;
 
+        timeSelector.RevertTimerSprite();
+
         if(!success) {
             toastPopup.UpdateTextForEnd();
             panelManager.TogglePanelVisibility(PanelType.PlantingWarning, true);
