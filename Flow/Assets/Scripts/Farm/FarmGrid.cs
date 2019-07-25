@@ -6,7 +6,7 @@ using CI.QuickSave;
 using BayatGames.SaveGameFree;
 
 public class FarmGrid : MonoBehaviour {
-    [SerializeField, Tooltip("Current farm index the player is looking at")] public int farmIndex = -1;
+    [SerializeField, Tooltip("Current farm index the player is looking at")] private int farmIndex = -1;
 
 	[SerializeField, Tooltip("All the tiles in the farm")] private List<FarmTile> farmTiles = new List<FarmTile>();
 
@@ -39,16 +39,6 @@ public class FarmGrid : MonoBehaviour {
             return;
         }
 
-
-        //// If there isn't a save for any farm grids, set up the whole farm grid as empty
-        //if(!QuickSaveRoot.Exists("FarmGrids")) {
-        //    foreach(FarmTile tile in farmTiles) {
-        //        emptyTiles.Add(tile);
-        //    }
-        //    return;
-        //}
-
-
         emptyTiles.Clear();
         filledTiles.Clear();
 
@@ -57,14 +47,6 @@ public class FarmGrid : MonoBehaviour {
         List<string> farmsInfo = SaveGame.Load<List<string>>("FarmGrids");
 
         string farmInfo = farmsInfo[newIndex];
-
-
-        //string farmInfo = "";
-
-        //// Gets the farm information based on its index
-        //QuickSaveReader.Create("FarmGrids")
-        //    .Read<string>("Farm" + newIndex, (r) => { farmInfo = r; });
-
 
         // Each tile is seperated by a ';'
         string[] tiles = farmInfo.Split(';');
@@ -168,12 +150,6 @@ public class FarmGrid : MonoBehaviour {
         farmsInfo[farmIndex] = farmInfo;
 
         SaveGame.Save<List<string>>("FarmGrids", farmsInfo);
-
-
-        //QuickSaveWriter.Create("FarmGrids")
-        //    .Write("Farm" + farmIndex, farmInfo)
-        //    .Commit();
-
     }
 
     private void PlantCornAtGridPosition(int pos, CornType cornType) {

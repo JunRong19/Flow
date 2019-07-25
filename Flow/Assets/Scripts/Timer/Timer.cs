@@ -32,6 +32,8 @@ public class Timer : MonoBehaviour {
 	[SerializeField, Tooltip("Debug purposes, shows current time left to wait")]
 	private float currentSeconds;
 
+    private DateTime timeAppWasPaused;
+
     private bool timerRunning;
 
     private void Awake() {
@@ -40,36 +42,23 @@ public class Timer : MonoBehaviour {
 
     // Handles screen timeout, timer will continue "running" when screen is off and app is paused
     private void OnApplicationPause(bool pause) {
+
+        Debug.Log("Game paused called");
+
         if(!timerRunning)
             return;
 
-        if(pause) {
-            DateTime previous = DateTime.UtcNow;
+        if(!pause) {
             DateTime now = DateTime.UtcNow;
 
-            previous = SaveGame.Load<DateTime>("PhoneSleptTime");
-
-
-            //QuickSaveReader.Create("SleepInfo")
-            //    .Read<DateTime>("PhoneSleptTime", (r) => { previous = r; });
-
-
-            float seconds = (float)(previous - now).TotalSeconds;
+            float seconds = (float)(now - timeAppWasPaused).TotalSeconds;
 
             currentSeconds -= seconds;
             secondsPassed += seconds;
 
             UpdateTimerFill();
         } else {
-            DateTime now = DateTime.UtcNow;
-
-            SaveGame.Save<DateTime>("PhoneSleptTime", now);
-
-
-            //QuickSaveWriter.Create("SleepInfo")
-            //    .Write("PhoneSleptTime", now)
-            //    .Commit();
-
+            timeAppWasPaused = DateTime.UtcNow;
         }
     }
 
@@ -98,10 +87,6 @@ public class Timer : MonoBehaviour {
                 nextTiming.Enqueue(timing);
             }
         }
-	}
-
-	public void CancelTimer() {
-		StopTimer(false);
 	}
 
     public void StopTimer(bool success) {
