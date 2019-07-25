@@ -5,7 +5,7 @@ using CI.QuickSave;
 using System;
 
 public class FarmGrid : MonoBehaviour {
-    [SerializeField, Tooltip("Current farm index the player is looking at")] private int farmIndex;
+    [SerializeField, Tooltip("Current farm index the player is looking at")] private int farmIndex = -1;
 
 	[SerializeField, Tooltip("All the tiles in the farm")] private List<FarmTile> farmTiles = new List<FarmTile>();
 
@@ -31,7 +31,15 @@ public class FarmGrid : MonoBehaviour {
 	/// <summary>
 	/// Loads and sets all farm tiles data based on farm index
 	/// </summary>
-	private void LoadTileDataFromFarm(int farmIndex) {
+	public void LoadTileDataFromFarm(int newIndex) {
+
+        SaveGrid();
+
+        emptyTiles.Clear();
+        filledTiles.Clear();
+
+        farmIndex = newIndex;
+
         // If there isn't a save for any farm grids, set up the whole farm grid as empty
         if(!QuickSaveRoot.Exists("FarmGrids")) {
             foreach(FarmTile tile in farmTiles) {
@@ -44,7 +52,7 @@ public class FarmGrid : MonoBehaviour {
 
         // Gets the farm information based on its index
         QuickSaveReader.Create("FarmGrids")
-            .Read<string>("Farm" + farmIndex, (r) => { farmInfo = r; });
+            .Read<string>("Farm" + newIndex, (r) => { farmInfo = r; });
 
         // Each tile is seperated by a ';'
         string[] tiles = farmInfo.Split(';');
