@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using CI.QuickSave;
 using BayatGames.SaveGameFree;
 
 public class SettingManager : MonoBehaviour {
@@ -58,16 +57,7 @@ public class SettingManager : MonoBehaviour {
 	}
 
     public void ResetFarmlandData() {
-
         SaveGame.DeleteAll();
-
-
-        //IEnumerable<string> roots = QuickSaveRoot.GetAllRoots();
-
-        //foreach(string root in roots) {
-        //    QuickSaveRoot.Delete(root);
-        //}
-
     }
 
 	public void Open() {
