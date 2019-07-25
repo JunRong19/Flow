@@ -4423,6 +4423,32 @@ MonoBehaviour:
   timeText: {fileID: 1629685487}
   timeLeftImage: {fileID: 256659756}
   growingCornType: 0
+  timings:
+  - Time: 0
+    Type: 1
+    SpriteToDisplay: {fileID: -7417327031809388919, guid: 27eec7b32e6905e4dae02198cd0224b0,
+      type: 3}
+  - Time: 10
+    Type: 2
+    SpriteToDisplay: {fileID: 5915546928097640488, guid: d8e32f7cb22e2b748abfea8ef570691c,
+      type: 3}
+  - Time: 25
+    Type: 3
+    SpriteToDisplay: {fileID: 380760006425179491, guid: d8e32f7cb22e2b748abfea8ef570691c,
+      type: 3}
+  - Time: 60
+    Type: 4
+    SpriteToDisplay: {fileID: -200997725461366608, guid: d8e32f7cb22e2b748abfea8ef570691c,
+      type: 3}
+  - Time: 90
+    Type: 5
+    SpriteToDisplay: {fileID: 7084322858331933439, guid: d8e32f7cb22e2b748abfea8ef570691c,
+      type: 3}
+  - Time: 120
+    Type: 6
+    SpriteToDisplay: {fileID: 6584720045956949425, guid: d8e32f7cb22e2b748abfea8ef570691c,
+      type: 3}
+  cornSprite: {fileID: 4431096007424464610}
   currentSeconds: 0
 --- !u!1 &1920987870
 GameObject:
@@ -4488,7 +4514,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 3
   m_UseSpriteMesh: 0

@@ -14,10 +14,10 @@ public class Sensor : Singleton<Sensor> {
 	}
 
 	private void Update() {
-		Debug.Log("Network checker toggle: " + NetworkChecker.AllowConnection);
-		Debug.Log("Accelerometer toggle: " + Accelerometer.AllowAccelerometer);
+		//Debug.Log("Network checker toggle: " + NetworkChecker.AllowConnection);
+		//Debug.Log("Accelerometer toggle: " + Accelerometer.AllowAccelerometer);
 
-		Debug.Log("Network has network: " + NetworkChecker.HasNetwork);
-		Debug.Log("Accelerometer is stationary: " + Accelerometer.IsStationary);
+		//Debug.Log("Network has network: " + NetworkChecker.HasNetwork);
+		//Debug.Log("Accelerometer is stationary: " + Accelerometer.IsStationary);
 	}
 }
