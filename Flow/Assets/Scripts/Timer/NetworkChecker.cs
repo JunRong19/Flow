@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class NetworkChecker : MonoBehaviour {
+public class NetworkChecker : Singleton<NetworkChecker> {
 
 	[SerializeField, Tooltip("Time interval in seconds during pinging for any network connection.")] private float pingInterval;
 
@@ -25,7 +25,7 @@ public class NetworkChecker : MonoBehaviour {
 
 	private void Start() {
 		waitingTime = new WaitForSeconds(pingInterval);
-		StartCoroutine(PingForNetwork());
+		UpdateNetworkConnectivity();
 	}
 
 	private void Update() {
@@ -68,6 +68,7 @@ public class NetworkChecker : MonoBehaviour {
 			return false;
 		}
 
+		// If timer is counting down, stop it because the player has wifi.
 		if(CountdownManager.isCountingDown) {
 			CountdownManager.Instance.StopCountDown(false);
 			CountdownManager.isCountingDown = false;
@@ -101,5 +102,13 @@ public class NetworkChecker : MonoBehaviour {
 		// Stop pinging.
 		ping = null;
 		isPinging = false;
+	}
+
+	public bool IsNetworkReady() {
+		if(!AllowConnection || !HasNetwork) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
