@@ -88,7 +88,7 @@ public class NetworkChecker : MonoBehaviour {
 			HasNetwork = true;
 
             // If timer is counting down, stop it because the player has wifi.
-            if(CountdownManager.isCountingDown) {
+            if(CountdownManager.isCountingDown && AllowConnection) {
                 CountdownManager.Instance.StopCountDown(false);
             }
 

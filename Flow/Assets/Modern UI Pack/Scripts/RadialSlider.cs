@@ -208,6 +208,11 @@ public class RadialSlider : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         UpdateTimerSprite(CurrentValue);
     }
 
+    public void RevertTimerSprite() {
+        lowerRange = upperRange = 0;
+        UpdateTimerSprite(CurrentValue);
+    }
+
     private void UpdateTimerSprite(float time) {
 
         if(lowerRange < time && time < upperRange) {
