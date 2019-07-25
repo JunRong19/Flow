@@ -40,12 +40,12 @@ public class NetworkChecker : MonoBehaviour {
 		}
 
 		// Try to see if any connection can be made before pinging to see if there is network.
-		if(ConnectionPossiblyAvaiable()) {
+		if(ConnectionPossiblyAvailable()) {
 			StartCoroutine(PingForNetwork());
 		}
 	}
 
-	private bool ConnectionPossiblyAvaiable() {
+	private bool ConnectionPossiblyAvailable() {
 		bool possibleConnection;
 
 		// Use the user's NetworkReachability to determine if they can conenct to the internet.
@@ -65,16 +65,11 @@ public class NetworkChecker : MonoBehaviour {
 			// Unable to connect to the internet.
 			HasNetwork = false;
 			return false;
-		}
+        } else {
+            return true;
+        }
 
-		// If timer is counting down, stop it because the player has wifi.
-		if(CountdownManager.isCountingDown) {
-			CountdownManager.Instance.StopCountDown(false);
-			CountdownManager.isCountingDown = false;
-			return false;
-		}
-		return true;
-	}
+    }
 
 	private IEnumerator PingForNetwork() {
 		// Lock the coroutine.
@@ -92,7 +87,12 @@ public class NetworkChecker : MonoBehaviour {
 			// Able to establish connection.
 			HasNetwork = true;
 
-		} else {
+            // If timer is counting down, stop it because the player has wifi.
+            if(CountdownManager.isCountingDown) {
+                CountdownManager.Instance.StopCountDown(false);
+            }
+
+        } else {
 			// Failed to establish connection.
 			HasNetwork = false;
 		}

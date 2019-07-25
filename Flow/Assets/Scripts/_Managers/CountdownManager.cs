@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CountdownManager : Singleton<CountdownManager> {
-	[SerializeField, Tooltip("The timer used to show the countdown")]
-	private Timer countdownTimer;
-	[SerializeField, Tooltip("The time selector used to select the time")]
-	private RadialSlider timeSelector;
+	[SerializeField, Tooltip("The timer used to show the countdown")] private Timer countdownTimer;
+	[SerializeField, Tooltip("The time selector used to select the time")] private RadialSlider timeSelector;
+	[SerializeField, Tooltip("Toast popup warning")] private ToastPopup toastPopup;
 
 	private PanelManager panelManager;
 
@@ -18,8 +17,10 @@ public class CountdownManager : Singleton<CountdownManager> {
 
 	public void StartCountDown() {
 		if(!Sensor.ReadyToPlant()) {
+            toastPopup.UpdateTextForStart();
             panelManager.TogglePanelVisibility(PanelType.PlantingWarning, true);
-			return;
+
+            return;
 		}
 
 		panelManager.TogglePanelVisibility(PanelType.CornTimer, false);
@@ -38,5 +39,10 @@ public class CountdownManager : Singleton<CountdownManager> {
 	public void StopCountDown(bool success) {
 		countdownTimer.StopTimer(success);
 		isCountingDown = false;
-	}
+
+        if(!success) {
+            toastPopup.UpdateTextForEnd();
+            panelManager.TogglePanelVisibility(PanelType.PlantingWarning, true);
+        }
+    }
 }

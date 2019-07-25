@@ -14,12 +14,15 @@ public class ToastPopup : MonoBehaviour
     [TextArea(2, 3)] public string BeforeStartAccelerometer;
     [TextArea(2, 3)] public string BeforeStartBoth;
 
+    [TextArea(2, 3)] public string AfterStartNetwork;
+    [TextArea(2, 3)] public string AfterStartAccelerometer;
+    [TextArea(2, 3)] public string AfterStartGiveUp;
+
     private void OnEnable() {
-        UpdateText();
         StartCoroutine(KeepPopupOpenFor(waitSeconds));
     }
 
-    private void UpdateText() {
+    public void UpdateTextForStart() {
         bool networkReady = Sensor.NetworkReady();
         bool accelerometerReady = Sensor.AccelerometerReady();
 
@@ -31,6 +34,23 @@ public class ToastPopup : MonoBehaviour
             waitSeconds = 4;
         } else {
             toastText.text = BeforeStartAccelerometer;
+            waitSeconds = 4;
+        }
+    }
+
+    public void UpdateTextForEnd() {
+        bool networkReady = Sensor.NetworkReady();
+        bool accelerometerReady = Sensor.AccelerometerReady();
+
+        if(!networkReady) {
+            toastText.text = AfterStartNetwork;
+            waitSeconds = 4;
+        } else if(!accelerometerReady) {
+            toastText.text = AfterStartAccelerometer;
+            waitSeconds = 4;
+        } else {
+            waitSeconds = 4;
+            toastText.text = AfterStartGiveUp;
             waitSeconds = 4;
         }
     }
