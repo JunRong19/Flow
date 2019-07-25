@@ -30,13 +30,18 @@ public class Timer : MonoBehaviour {
 
     private bool timerRunning;
 
+    private void Awake() {
+        currentSeconds = 0;
+        secondsPassed = 0;
+    }
+
     // Handles screen timeout, timer will continue "running" when screen is off and app is paused
-    private void OnApplicationFocus(bool focus) {
+    private void OnApplicationPause(bool pause) {
 
         if(!timerRunning)
             return;
 
-        if(focus) {
+        if(pause) {
             DateTime previous = DateTime.UtcNow;
             DateTime now = DateTime.UtcNow;
 

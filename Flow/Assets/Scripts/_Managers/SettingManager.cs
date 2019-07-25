@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using CI.QuickSave;
 
 public class SettingManager : MonoBehaviour {
 	[SerializeField] private Image wifiSettingBtn;
@@ -54,6 +56,14 @@ public class SettingManager : MonoBehaviour {
 		// Toggles the current state of the accelerometer setting.
 		UpdateAccelerometerSetting(!GetPlayerPrefBool("ToggleAccelerometer"));
 	}
+
+    public void ResetFarmlandData() {
+        List<string> roots = QuickSaveRoot.GetAllRoots().ToList();
+
+        foreach(string root in roots) {
+            QuickSaveRoot.Delete(root);
+        }
+    }
 
 	public void Open() {
 		PanelManager.Instance.TogglePanelVisibility(PanelType.Settings, true);
