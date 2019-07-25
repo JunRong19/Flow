@@ -11,6 +11,8 @@ public class Timer : MonoBehaviour {
 	[SerializeField, Tooltip("Text used to display time")]
 	private Image timeLeftImage;
 
+
+
 	[SerializeField, Tooltip("Current type of corn growing")]
 	private CornType growingCornType;
 

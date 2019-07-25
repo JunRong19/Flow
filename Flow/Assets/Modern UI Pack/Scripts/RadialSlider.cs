@@ -6,13 +6,6 @@ using TMPro;
 
 public class RadialSlider : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
-    [System.Serializable]
-    public class SliderTiming {
-        public int Time;
-        public CornType Type;
-        public Sprite SpriteToDisplay;
-    }
-
     private const string PREFS_UI_SAVE_NAME = "Radial";
 
     [Header("TIMER")]

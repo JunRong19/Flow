@@ -37,11 +37,11 @@ public class Accelerometer : MonoBehaviour {
 
 	private void Update() {
 		if(AllowAccelerometer && CountdownManager.isCountingDown) {
-			HandleAcceleromter();
+			HandleAccelerometer();
 		}
 	}
 
-	private void HandleAcceleromter() {
+	private void HandleAccelerometer() {
 		//Get smoothed Accelerometer values.
 		filteredAccelValue = mobileAxis * FilterAccelValue();
 
