@@ -8,10 +8,9 @@ public class CountdownManager : Singleton<CountdownManager> {
 	[SerializeField, Tooltip("The time selector used to select the time")]
 	private RadialSlider timeSelector;
 
-	public static bool isCountingDown;
-
 	private PanelManager panelManager;
 
+	public static bool isCountingDown;
 
 	private void Awake() {
 		panelManager = PanelManager.Instance;
