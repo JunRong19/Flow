@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class NetworkChecker : Singleton<NetworkChecker> {
+public class NetworkChecker : MonoBehaviour {
 
 	[SerializeField, Tooltip("Time interval in seconds during pinging for any network connection.")] private float pingInterval;
 
@@ -21,7 +21,6 @@ public class NetworkChecker : Singleton<NetworkChecker> {
 	public static bool HasNetwork { get; private set; }
 
 	#endregion
-
 
 	private void Start() {
 		waitingTime = new WaitForSeconds(pingInterval);
@@ -74,7 +73,6 @@ public class NetworkChecker : Singleton<NetworkChecker> {
 			CountdownManager.isCountingDown = false;
 			return false;
 		}
-
 		return true;
 	}
 
@@ -104,7 +102,7 @@ public class NetworkChecker : Singleton<NetworkChecker> {
 		isPinging = false;
 	}
 
-	public bool IsNetworkReady() {
+	public static bool IsNetworkReady() {
 		if(!AllowConnection || !HasNetwork) {
 			return true;
 		} else {

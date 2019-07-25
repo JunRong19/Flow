@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 // Reference: https://riptutorial.com/unity3d/example/12177/read-accelerometer-sensor--advance-
 
-public class Accelerometer : Singleton<Accelerometer> {
+public class Accelerometer : MonoBehaviour {
 	[SerializeField, Tooltip("Minimum and maximum range (-+) from flat vector.")] private float sensitivityRange;
 	[SerializeField, Tooltip("The lower this value, the less smooth the value is and faster Accel is updated.")] private float updateSpeed = 30.0f;
 
@@ -44,6 +44,7 @@ public class Accelerometer : Singleton<Accelerometer> {
 	}
 
 	private void HandleAccelerometer() {
+		// If phone is not lying flat and timer is counting down, stop the timer.
 		if(IsLyingFlat()) {
 			return;
 		} else if(CountdownManager.isCountingDown) {
@@ -60,20 +61,24 @@ public class Accelerometer : Singleton<Accelerometer> {
 	private bool IsLyingFlat() {
 		//Get smoothed Accelerometer values.
 		filteredAccelValue = mobileAxis * FilterAccelValue();
+
 		debug.text = filteredAccelValue.ToString();
+
 		//Check if user's phone had moved greater than limit.
 		if(Vector3.Distance(flatVector, filteredAccelValue) > sensitivityRange) {
 			debug.color = Color.red;
+			// Phone has moved and is not stationary.
 			IsStationary = false;
 			return false;
 		}
 		debug.color = Color.green;
+
 		IsStationary = true;
 		return true;
 	}
 
-	public bool IsAccelerometerReady() {
-		if(!AllowAccelerometer || IsLyingFlat()) {
+	public static bool IsAccelerometerReady() {
+		if(!AllowAccelerometer || IsStationary) {
 			return true;
 		} else {
 			return false;
