@@ -10,9 +10,12 @@ namespace Michsky.UI.ModernUIPack
         [Header("RESOURCES")]
         public Animator animatedButton;
         public TextMeshProUGUI title;
+        public GameObject shadow;
 
         [Header("SETTINGS")]
         public bool openAtStart = false;
+        public bool hasText = false;
+        public bool shouldButtonAnimate = false;
         public string titleAtStart;
 
         bool isOpen;
@@ -20,19 +23,34 @@ namespace Michsky.UI.ModernUIPack
         void Start()
         {
             menuAnimator = gameObject.GetComponent<Animator>();
-            title.text = titleAtStart;
+
+            if(hasText) {
+                title.text = titleAtStart;
+            }
 
             if(openAtStart == true)
             {
                 menuAnimator.Play("Expand");
-                animatedButton.Play("HTE Expand");
+
+                if(shouldButtonAnimate) {
+                    animatedButton.Play("HTE Expand");
+                }
+
+                shadow.SetActive(true);
+
                 isOpen = true;
             }
 
             else
             {
                 menuAnimator.Play("Minimize");
-                animatedButton.Play("HTE Hamburger");
+
+                if(shouldButtonAnimate) {
+                    animatedButton.Play("HTE Hamburger");
+                }
+
+                shadow.SetActive(false);
+
                 isOpen = false;
             }
         }
@@ -42,21 +60,33 @@ namespace Michsky.UI.ModernUIPack
             if (isOpen == true)
             {
                 menuAnimator.Play("Minimize");
-                animatedButton.Play("HTE Hamburger");
+                if(shouldButtonAnimate) {
+                    animatedButton.Play("HTE Hamburger");
+                }
+
+                shadow.SetActive(false);
+
                 isOpen = false;
             }
 
             else
             {          
                 menuAnimator.Play("Expand");
-                animatedButton.Play("HTE Exit");
+                if(shouldButtonAnimate) {
+                    animatedButton.Play("HTE Exit");
+                }
+
+                shadow.SetActive(true);
+
                 isOpen = true;
             }
         }
 
         public void ChangeText(string titleText)
         {
-            title.text = titleText;
+            if(hasText) {
+                title.text = titleText;
+            }
         }
     }
 }

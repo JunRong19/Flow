@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/FarmLand.unity
     guid: bc0852e9789397d49b2edfb22596660d
+  - enabled: 1
+    path: Assets/_Scenes/Settings.unity
+    guid: dcca114ce8ec3ba4f9805092416dce75
   m_configObjects: {}

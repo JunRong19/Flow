@@ -4,5 +4,6 @@
 	Settings,
     MainMenuButtons,
     UnplantedCornWarning,
-    PlantingWarning
+    PlantingWarning,
+    Hamburger
 }
