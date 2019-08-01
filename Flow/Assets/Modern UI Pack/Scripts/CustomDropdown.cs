@@ -18,6 +18,8 @@ namespace Michsky.UI.ModernUIPack
         public GameObject scrollbar;
         private VerticalLayoutGroup itemList;
 
+        public MusicSelector musicSelector;
+
         [Header("SETTINGS")]
         public bool enableIcon = true;
         public bool enableTrigger = true;
@@ -53,6 +55,8 @@ namespace Michsky.UI.ModernUIPack
             public string itemName = "Dropdown Item";
             public Sprite itemIcon;
             public UnityEvent OnItemSelection;
+
+            public SoundType Type;
         }
 
         void Start()
@@ -112,7 +116,9 @@ namespace Michsky.UI.ModernUIPack
             selectedImage.sprite = dropdownItems[itemIndex].itemIcon;
             selectedText.text = dropdownItems[itemIndex].itemName;
             selectedItemIndex = itemIndex;
-            // dropdownItems[itemIndex].OnItemSelection.Invoke();
+
+            musicSelector.ChangeMusic(dropdownItems[itemIndex].Type);
+            //dropdownItems[itemIndex].OnItemSelection.Invoke(dropdownItems[itemIndex].Type);
         }
 
         public void Animate()

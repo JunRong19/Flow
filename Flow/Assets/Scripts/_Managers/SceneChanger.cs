@@ -12,4 +12,8 @@ public class SceneChanger : MonoBehaviour
     public void LoadTimerScene() {
         SceneManager.LoadScene("Timer");
     }
+
+    public void LoadSettingsScene() {
+        SceneManager.LoadScene("Settings");
+    }
 }

@@ -13,7 +13,6 @@ public class SettingManager : MonoBehaviour {
 
 	private void Start() {
 		LoadSavedSettings();
-		PanelManager.Instance.TogglePanelVisibility(PanelType.Settings, false);
 	}
 
 	private void LoadSavedSettings() {
@@ -60,13 +59,13 @@ public class SettingManager : MonoBehaviour {
         SaveGame.DeleteAll();
     }
 
-	public void Open() {
-		PanelManager.Instance.TogglePanelVisibility(PanelType.Settings, true);
-	}
+	//public void Open() {
+	//	PanelManager.Instance.TogglePanelVisibility(PanelType.Settings, true);
+	//}
 
-	public void Close() {
-		PanelManager.Instance.TogglePanelVisibility(PanelType.Settings, false);
-	}
+	//public void Close() {
+	//	PanelManager.Instance.TogglePanelVisibility(PanelType.Settings, false);
+	//}
 
 	#endregion
 

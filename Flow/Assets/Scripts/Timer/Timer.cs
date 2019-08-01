@@ -106,7 +106,10 @@ public class Timer : MonoBehaviour {
         timerRunning = false;
 
         panelManager.TogglePanelVisibility(PanelType.CornTimer, true);
+        panelManager.TogglePanelVisibility(PanelType.Hamburger, true);
+
         panelManager.TogglePanelVisibility(PanelType.Countdown, false);
+        panelManager.TogglePanelVisibility(PanelType.MusicPopup, false);
 
         if(CornLoader.GetUnloadCornLength() > 0) {
             UpdateUnplantedWarning(true);
@@ -117,7 +120,7 @@ public class Timer : MonoBehaviour {
         PanelManager.Instance.TogglePanelVisibility(PanelType.UnplantedCornWarning, state);
 
         if(state) {
-            unPlantedWarning.text = "You still have " + CornLoader.GetUnloadCornLength() + " corns not planted! Visit your farm to plant them or lose them!";
+            unPlantedWarning.text = "You still have " + CornLoader.GetUnloadCornLength() + " corn(s) not planted! Visit your farm to plant them or lose them!";
         }
     }
 
@@ -154,7 +157,12 @@ public class Timer : MonoBehaviour {
         if(secondsPassed >= nextTiming.Peek().Time * 60) {
             while(secondsPassed >= nextTiming.Peek().Time * 60) {
                 cornSprite.sprite = nextTiming.Peek().SpriteToDisplay;
+                
                 nextTiming.Dequeue();
+
+                if(nextTiming.Count == 0) {
+                    break;
+                }
             }
         }
     }

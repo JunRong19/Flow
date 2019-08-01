@@ -7,6 +7,8 @@ public class CountdownManager : Singleton<CountdownManager> {
 	[SerializeField, Tooltip("The time selector used to select the time")] private RadialSlider timeSelector;
 	[SerializeField, Tooltip("Toast popup warning")] private ToastPopup toastPopup;
 
+    [SerializeField] private MusicSelector musicSelector;
+
 	private PanelManager panelManager;
 
 	public static bool isCountingDown;
@@ -23,10 +25,15 @@ public class CountdownManager : Singleton<CountdownManager> {
             return;
 		}
 
-		panelManager.TogglePanelVisibility(PanelType.CornTimer, false);
-		panelManager.TogglePanelVisibility(PanelType.Countdown, true);
+        musicSelector.ToggleMusicPlaying(true);
 
-		float countdownTime = timeSelector.CurrentValue;
+		panelManager.TogglePanelVisibility(PanelType.CornTimer, false);
+		panelManager.TogglePanelVisibility(PanelType.Hamburger, false);
+
+		panelManager.TogglePanelVisibility(PanelType.Countdown, true);
+        panelManager.TogglePanelVisibility(PanelType.MusicPopup, true);
+
+        float countdownTime = timeSelector.CurrentValue;
 		float maxTime = timeSelector.MaxValue;
 
 		CornType growingType = timeSelector.TimingIntervals[(int)timeSelector.CurrentIndex].Type;
@@ -39,6 +46,8 @@ public class CountdownManager : Singleton<CountdownManager> {
 	public void StopCountDown(bool success) {
 		countdownTimer.StopTimer(success);
 		isCountingDown = false;
+
+        musicSelector.ToggleMusicPlaying(false);
 
         timeSelector.RevertTimerSprite();
 
