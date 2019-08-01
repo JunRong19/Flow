@@ -31,8 +31,9 @@ public class CountdownManager : Singleton<CountdownManager> {
 		panelManager.TogglePanelVisibility(PanelType.Hamburger, false);
 
 		panelManager.TogglePanelVisibility(PanelType.Countdown, true);
+        panelManager.TogglePanelVisibility(PanelType.MusicPopup, true);
 
-		float countdownTime = timeSelector.CurrentValue;
+        float countdownTime = timeSelector.CurrentValue;
 		float maxTime = timeSelector.MaxValue;
 
 		CornType growingType = timeSelector.TimingIntervals[(int)timeSelector.CurrentIndex].Type;

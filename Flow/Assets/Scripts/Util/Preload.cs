@@ -9,9 +9,16 @@ using UnityEngine.SceneManagement;
 public class Preload : MonoBehaviour {
 
 	[SerializeField, Tooltip("Starting scene name.")] private string startingScene;
+	[SerializeField, Tooltip("How long to wait before starting Flow.")] private float secondsToWait = 3;
 
 	private void Start() {
-		// Load the starting scene.
-		SceneManager.LoadScene(startingScene);
+        StartCoroutine(LoadFlow());
 	}
+
+    private IEnumerator LoadFlow() {
+        yield return new WaitForSeconds(secondsToWait);
+
+        // Load the starting scene.
+        SceneManager.LoadScene(startingScene);
+    }
 }

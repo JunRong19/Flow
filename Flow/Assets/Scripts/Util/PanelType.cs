@@ -5,5 +5,6 @@
     MainMenuButtons,
     UnplantedCornWarning,
     PlantingWarning,
-    Hamburger
+    Hamburger,
+    MusicPopup
 }

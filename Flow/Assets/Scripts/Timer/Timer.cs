@@ -109,6 +109,7 @@ public class Timer : MonoBehaviour {
         panelManager.TogglePanelVisibility(PanelType.Hamburger, true);
 
         panelManager.TogglePanelVisibility(PanelType.Countdown, false);
+        panelManager.TogglePanelVisibility(PanelType.MusicPopup, false);
 
         if(CornLoader.GetUnloadCornLength() > 0) {
             UpdateUnplantedWarning(true);
@@ -156,7 +157,12 @@ public class Timer : MonoBehaviour {
         if(secondsPassed >= nextTiming.Peek().Time * 60) {
             while(secondsPassed >= nextTiming.Peek().Time * 60) {
                 cornSprite.sprite = nextTiming.Peek().SpriteToDisplay;
+                
                 nextTiming.Dequeue();
+
+                if(nextTiming.Count == 0) {
+                    break;
+                }
             }
         }
     }

@@ -136,10 +136,13 @@ public class FarmGrid : MonoBehaviour {
             farmInfo += tileInfo;
         }
 
-        List<string> farmsInfo = SaveGame.Load <List<string>>("FarmGrids");
+        List<string> farmsInfo;
 
-        if(farmsInfo == null) {
+        if(SaveGame.Exists("FarmGrids")) {
+            farmsInfo = SaveGame.Load<List<string>>("FarmGrids");
+        } else {
             farmsInfo = new List<string>();
+
         }
 
         // Add slots until index reached
